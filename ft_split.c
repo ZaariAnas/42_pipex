@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:59:53 by azari             #+#    #+#             */
-/*   Updated: 2022/12/19 11:10:08 by azari            ###   ########.fr       */
+/*   Updated: 2022/12/21 17:38:07 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ char	**ft_split(const char *s, char c)
 		return (NULL);
 	ptr = (char **)malloc(sizeof(char *) * (count(s, c) + 1));
 	if (!ptr)
+	{
+		free(ptr);
 		return (0);
+	}
 	while (++cnt < count((char *)s, c))
 	{
 		while (s[i] == c && s[i])
