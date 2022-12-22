@@ -6,13 +6,13 @@
 #    By: azari <azari@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 09:09:27 by azari             #+#    #+#              #
-#    Updated: 2022/12/21 10:55:00 by azari            ###   ########.fr        #
+#    Updated: 2022/12/21 20:16:37 by azari            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libpipex.a
 CC		=	cc
-FLAGS	=	-Wall -Wextra -Werror
+FLAGS	=	-Wall -Wextra -Werror 
 SRCS	=	helper_func.c helper_func2.c ft_split.c  
 PROG	=	pipex.c
 OBJS	=	$(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 18:01:07 by azari             #+#    #+#             */
-/*   Updated: 2022/12/21 17:41:33 by azari            ###   ########.fr       */
+/*   Updated: 2022/12/22 14:23:23 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ size_t	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+void	ft_free(char **str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		free(str[i]);
+	free(str);
 }
 
 int	ft_strncmp(const char *dst, const char *src, size_t n)
@@ -48,10 +58,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = slen;
 	str = malloc(len + 1);
 	if (!str)
-	{
-		free(str);
 		return (NULL);
-	}
 	slen = ft_strlen(s);
 	i = -1;
 	while (++i < len && start[s] && start < slen)
@@ -76,10 +83,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	len2 = ft_strlen(s2);
 	ptr = (char *)malloc((len1 + len2 + 1) * sizeof(char));
 	if (!ptr)
-	{
-		free(ptr);
 		return (0);
-	}
 	while (++i < len1)
 		ptr[i] = s1[i];
 	while (j < len2)
