@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:29:53 by azari             #+#    #+#             */
-/*   Updated: 2022/12/22 14:31:15 by azari            ###   ########.fr       */
+/*   Updated: 2022/12/22 15:21:45 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	ft_first_child(int *fds, char **av, char **env)
 	}
 	input = open(av[1], O_RDONLY);
 	if (input == -1)
+	{
+		perror ("pipex");
 		exit(0);
+	}
 	dup2(input, 0);
 	close(input);
 	execve(path, cmd, env);
@@ -50,7 +53,13 @@ void	ft_second_child(int *fds, char **av, char **env)
 		perror("path not found");
 		exit(0);
 	}
-	output = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0777);
+	output = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	output = -1;
+	if (output == -1)
+	{
+		perror("pipex");
+		exit(0);
+	}
 	dup2(output, 1);
 	close(output);
 	execve(path, cmd, env);
@@ -74,6 +83,7 @@ int	main(int ac, char *av[], char *env[])
 	if (!pid[0])
 		ft_first_child(fds, av, env);
 	pid[1] = fork();
+	ft_check_error(pid[1]);
 	if (!pid[1])
 		ft_second_child(fds, av, env);
 	close(fds[0]);
